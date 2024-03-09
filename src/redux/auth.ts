@@ -10,17 +10,12 @@ const initialState: AuthState = {
     name: "",
 };
 
-/**
- * @todo [Step 4] 请在下述一处代码缺失部分以正确设置 JWT 信息
- */
 export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
         setToken: (state, action: PayloadAction<string>) => {
-            // Step 4 BEGIN
-
-            // Step 4 END
+            state.token = action.payload;
         },
         setName: (state, action: PayloadAction<string>) => {
             state.name = action.payload;

@@ -8,8 +8,7 @@ import { useSelector } from "react-redux";
 
 const ListScreen = () => {
     /**
-     * @todo [Step 5] 请在下述一处代码缺失部分填写合适的代码，完成游戏记录列表页面 UI
-     * @todo [Step 6] 请在下述一处代码缺失部分填写合适的代码，完成网络请求的管理
+     * @todo [Step 4] 请在下述一处代码缺失部分填写合适的代码，完成网络请求的管理
      */
     const userName = useSelector((state: RootState) => state.auth.name);
 
@@ -39,9 +38,9 @@ const ListScreen = () => {
     };
 
     const deleteBoard = (id: number) => {
-        // Step 6 BEGIN
+        // Step 4 BEGIN
 
-        // Step 6 END
+        // Step 4 END
     };
 
     return refreshing ? (
@@ -61,9 +60,25 @@ const ListScreen = () => {
                 <p> Empty list. </p>
             ) : (
                 <div style={{ display: "flex", flexDirection: "column" }}>{
-                    // Step 5 BEGIN
-
-                    // Step 5 END
+                    boardList.map((val, ind) => (
+                        <div key={ind}>
+                            <div style={{ display: "flex", flexDirection: "column" }}>
+                                <span>ID: {val.id}</span>
+                                <span>Name: {val.boardName}</span>
+                                <span>Created by: {val.userName}</span>
+                                <span>Created at: {new Date(val.createdAt * 1000).toLocaleDateString()}</span>
+                            </div>
+                            <div>
+                                <button onClick={() => router.push(`/?id=${val.id}`)}>Play it</button>
+                                {userName === val.userName && (
+                                    <button onClick={() => deleteBoard(val.id)}>Delete it</button>
+                                )}
+                                <button onClick={() => router.push(`/list?name=${val.userName}`)}>
+                                    View this user
+                                </button>
+                            </div>
+                        </div>
+                    ))
                 }</div>
             )}
         </>

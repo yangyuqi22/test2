@@ -5,9 +5,6 @@ import { setName, setToken } from "../redux/auth";
 import { useDispatch } from "react-redux";
 
 const LoginScreen = () => {
-    /**
-     * @todo [Step 4] 请在下述一处代码缺失部分以在登陆/注册成功时正确设定 redux 中保存的 JWT 信息
-     */
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
@@ -25,11 +22,8 @@ const LoginScreen = () => {
             .then((res) => res.json())
             .then((res) => {
                 if (Number(res.code) === 0) {
-                    // Step 4 BEGIN
-
-                    // Step 4 END
-
                     dispatch(setName(userName));
+                    dispatch(setToken(res.token));
                     alert(LOGIN_SUCCESS_PREFIX + userName);
 
                     /**

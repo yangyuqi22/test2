@@ -36,20 +36,16 @@ export const request = async (
     needAuth: boolean,
     body?: object,
 ) => {
-    /**
-     * @todo [Step 4] 请在下述两处代码缺失部分以正确根据 `needAuth` 参数读取 JWT 信息并构建请求头
-     */
-    // Step 4 BEGIN
-
-    // Step 4 END
+    const headers = new Headers();
+    if (needAuth) {
+        const token = store.getState().auth.token;
+        headers.append("Authorization", token);
+    }
 
     const response = await fetch(url, {
         method,
         body: body && JSON.stringify(body),
-
-        // Step 4 BEGIN
-
-        // Step 4 END
+        headers,
     });
 
     const data = await response.json();
