@@ -42,6 +42,39 @@ export const stepBoard = (board: Board): Board => {
      */
     // Step 1 BEGIN
 
+    for (let i = 0; i < BOARD_LENGTH; i++) {
+        newBoard.push([]);
+        for (let j = 0; j < BOARD_LENGTH; j++) {
+            let neighbour_count = 0;
+            const left = (j - 1 + BOARD_LENGTH) % BOARD_LENGTH;
+            const right = (j + 1) % BOARD_LENGTH;
+            const up = (i - 1 + BOARD_LENGTH) % BOARD_LENGTH;
+            const down = (i + 1) % BOARD_LENGTH;
+            const checklist = [[up,left],[up,j],[up,right],[i,left],[i,right],[down,left],[down,j],[down,right]];
+            checklist.forEach((ord) => {
+                if (board[ord[0]][ord[1]] === 1) {
+                    neighbour_count++;
+                }
+            });
+            if (board[i][j] === 1) {
+                if (neighbour_count < 2 || neighbour_count > 3){
+                    newBoard[i].push(0);
+                }
+                else{
+                    newBoard[i].push(1);
+                }
+            }
+            else {
+                if (neighbour_count === 3){
+                    newBoard[i].push(1);
+                }
+                else{
+                    newBoard[i].push(0);
+                }
+            }
+        }
+
+    }
     // Step 1 END
 
     return newBoard;
@@ -52,8 +85,10 @@ export const flipCell = (board: Board, i: number, j: number): Board => {
      * @todo [Step 3] 请在下面两条注释之间的区域填写你的代码完成切换细胞状态的任务
      * @note 你可以使用命令 yarn test flip 来运行我们编写的单元测试以检验自己的实现
      */
-    // Step 3 BEGIN
-
+    // Step 3 BEGI
+    const newBoard = board.map(row=>row.slice());
+    newBoard[i][j] = board[i][j] === 1 ? 0 : 1;
+    return newBoard;
     // Step 3 END
 
     /**
