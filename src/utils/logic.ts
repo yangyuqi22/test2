@@ -58,7 +58,7 @@ export const stepBoard = (board: Board): Board => {
             });
             if (board[i][j] === 1) {
                 if (neighbour_count < 2 || neighbour_count > 3){
-                    newBoard[i].push(0);
+                    newBoard[i].push(1);
                 }
                 else{
                     newBoard[i].push(1);
